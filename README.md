@@ -1,15 +1,13 @@
-# Convención de nombres #
+# Guía de estilo
 
 Con el fin de reducir el esfuerzo necesario para leer y entender el código fuente, así como de mejorar la apariencia del código fuente se define un conjunto de reglas para la elección de los nombres de variables, clases, funciones, etc. Estas normas están orientadas a una uniformización del código que repercuta en una mejor legibilidad del mismo por parte de todos los desarrolladores.
 
-Para definir los nombres se usará fundamentalmente el estilo CamelCase.
+## Convención de nombres ##
 
-**CamelCase**
+Como criterio general se usará el estilo CamelCase o capitalización medial ya que si el identificador está compuesto de más de una palabra al separarlas con mayúsculas aumenta la legibilidad. Existen dos tipos de CamelCase:
 
-Como criterio general se usará el estilo CamelCase o capitalización medial ya que si el identificador está compuesto de mas de una palabra al separarlas con mayúsculas aumenta la legibilidad. Existen dos tipos de CamelCase:
-
-* UpperCamelCase, cuando la primera letra de cada una de las palabras es mayúscula. Ejemplo: UpperCamelCase.
-* lowerCamelCase, igual que la anterior con la excepción de que la primera letra es minúscula. Ejemplo: lowerCamelCase.
+* **UpperCamelCase**, cuando la primera letra de cada una de las palabras es mayúscula. Ejemplo: UpperCamelCase.
+* **lowerCamelCase**, igual que la anterior con la excepción de que la primera letra es minúscula. Ejemplo: lowerCamelCase.
 
 Se procurará evitar abreviaturas en los nombres a menos que éstas identifiquen de manera inequívoca al elemento al que hacemos referencia, en cuyo caso se aconseja su uso. Por ejemplo xml, wms, etc, son abreviaturas cuyo uso está más ampliamente extendido que su forma larga. Otros casos que se puede abreviar sin pérdida de claridad son por ejemplo:
 
