@@ -2,7 +2,27 @@
 
 Con el fin de reducir el esfuerzo necesario para leer y entender el código fuente, así como de mejorar la apariencia del código fuente se define un conjunto de reglas para la elección de los nombres de variables, clases, funciones, etc. Estas normas están orientadas a una uniformización del código que repercuta en una mejor legibilidad del mismo por parte de todos los desarrolladores.
 
-## Convención de nombres ##
+## Índice
+- [Estilo](#estilo)
+ * [Convención de nombres](#convención-de-nombres)
+  + [Variables y datos miembro](#variables-y-datos-miembro)
+  + [Nombre de los namespaces](#nombre-de-los-namespaces)
+  + [Nombre de las clases](#nombre-de-las-clases)
+  + [Métodos miembro](#métodos-miembro)
+  + [Constantes](#constantes)
+ * [Formato](#formato)
+  + [Ajuste](#ajuste)
+  + [Espaciado](#espaciado)
+  + [Nuevas líneas](#nuevas-líneas)
+ * [Estructura de los archivos de cabecera](#estructura-de-los-archivos-de-cabecera)
+  + [Include guards](#include-guards)
+  + [#include](##include)
+
+# Estilo
+
+Aquí se definirán el conjunto de normas que dan forma al estilo
+
+## Convención de nombres
 
 Como criterio general se usará el estilo CamelCase o capitalización medial ya que si el identificador está compuesto de más de una palabra al separarlas con mayúsculas aumenta la legibilidad. Existen dos tipos de CamelCase:
 
@@ -14,15 +34,19 @@ Se procurará evitar abreviaturas en los nombres a menos que éstas identifiquen
 * config o cfg por configuration.
 * dist por distance.
 
-## Variables y datos miembro ##
+### Variables y datos miembro
 
 Se deben evitar los nombres de variables de un solo carácter excepto para las variables temporales que se limitan a una zona muy concreta del código como bucles *for*. Ejemplos comunes de este tipo de variables son *i*, *j*, *k*, *m*, *n*, *x*, *y* o *z*. Aún así siempre es preferible usar algún identificador que aporte más claridad ya que podemos tener varias estructuras de control anidadas. En este caso si son válidos e incluso recomendables los identificadores cortos:
 
-## Clases ##
+### Nombre de los namespaces
+
+Los namespaces, siempre que se usen, se definen con siglas o nombres cortos y minúsculas.
+
+### Nombre de las clases
 
 Los nombres de las clases irán en formato **UpperCamelCase**.
 
-## Métodos miembro ##
+### Métodos miembro
 
 Los métodos miembro deben ser verbos (sólos o acompañados de una o varias palabras) en estilo **lowerCamelCase**. Es decir que deben ser de la forma:
 
@@ -52,7 +76,7 @@ en lugar de:
 convertFloat2Doble(); 
 ```
 
-## Constantes ##
+### Constantes
 
 Los nombres de las constantes se deben escribir en mayúsculas separadas por guiones bajos.
 
@@ -60,36 +84,107 @@ Los nombres de las constantes se deben escribir en mayúsculas separadas por gui
 const char *LOG_FILE = “[nombre_fichero_log]”; 
 ```
 
-# Estructura de los archivos de cabecera #
+## Formato
+
+El formato de código en programación se refiere a la manera en que se estructura el código fuente de un programa para que sea fácil de leer y entender por otros programadores.
+
+### Ajuste
+
+```cpp
+void function(int a, int b)
+{
+    if (a < b) return true;
+
+    if (a >= b) {
+    	a += b * 5;
+        return false;
+    }
+}
+```
+
+En condiciones y bucles, cuando se tiene una sola línea de código se omitirán las llaves y si, la línea es corta se pondrá en el mismo el bloque. Si hay más líneas, se pondrán las llaves y se escribirán en otro bloque.
+
+### Espaciado
+
+Configurar el IDE para que las tabulaciones se conviertan en cuatro espacios.
+
+Espaciado para paréntesis
+
+```cpp
+void function(int a)
+{
+	int b = 5;
+    int result = sum(a, b);
+}
+```
+
+Espaciado para llaves
+
+```cpp
+void function2(int a, int b)
+{
+	if(a >= b) {
+    	std::cout << "Error" << std::endl;
+        return;
+    }
+    
+    for(int i = a; i < b; i++) {
+    	
+    }
+}
+```
+
+Espaciado corchetes
+```cpp
+int front(const std::vector<int> &numbers)
+{
+    return numbers[0];
+}
+```
+
+### Nuevas líneas
+
+Aplicar sangría en todos los bloques excepto en los namespaces.
+En el caso de estructuras y clases se utilizarán los modificadores private, protected, public también como separadores (sin tabular).
+
+```cpp
+namespace ns
+{
+
+class Clazz
+{
+
+public:
+
+	Clazz() 
+    {
+    	...
+    }
+    
+public:
+
+	void functionA()
+    {
+    	...
+    }
+    
+}
+
+}
+```
+
+## Jerarquías
+
+Orden en el que se escribe el código
+
+### Orden de los #include
 
 En los archivos de cabecera se añadirá la declaración de las clases, de las estructuras, funciones, enumeraciones y constantes.
 
-## Include guards ##
+En la primera línea se pondrá **#pragma once** para evitar que se incluya la cabecera en múltiples ficheros.
+En el caso de haber licencia, se incluirá el texto de la licencia encima del *#pragma once* con una nueva línea de separación.
 
-Los archivos de cabecera (.h) comenzarán siempre con un *include guards* o *guardián de inclusión múltiple*, que es algo como: 
-
-```cpp
-#ifndef PREFIX_FILENAME_H
-#define PREFIX_FILENAME_H
-```
-
-Y terminarán cerrando con *#endif* y con el nombre de la macro comentado para saber que bloque estamos cerrando:
-
-```cpp
-#endif // PREFIX_FILENAME_H
-```
-
-Un *include guards* no es más que una forma de evitar nuevas definiciones si un archivo de cabecera se incluye mas de una vez. La primera vez que se incluye la macro *PREFIX_FILENAME_H* no está definida aún y por tanto el preprocesador entra en el bloque de código definiendo la macro en la siguiente línea. La siguiente vez que se incluya el archivo de cabecera, como ya existe dicha macro, el preprocesador salta hasta al **#endif** ignorando todo el código encerrado en el bloque.
-
-La alternativa **recomendable** es usar **#pragma once**. Sirve para indicar al compilador que el fichero, en que está incluida dicha directiva, debe ser incluido solo una vez en cada compilación. Se añadirá al principio de cada cabecera.
-
-```cpp
-#pragma once
-```
-
-## #include ##
-
-La inclusión de las cabeceras se hace mediante la directiva del preprocesador **#include**. Las inclusiones se harán al comienzo del archivo justo detrás del *include guard*. Primero se añadirán las cabeceras estándar, ya sean de C++ o de C, después las de las librerías de terceros y finalmente las propias. 
+La inclusión de las cabeceras se hace mediante la directiva del preprocesador **#include**. Las inclusiones se harán al comienzo del archivo justo detrás del *#pragma once*. Primero se añadirán las cabeceras estándar, ya sean de C++ o de C, después las de las librerías de terceros y finalmente las propias. 
 
 ```cpp
 #pragma once
@@ -104,62 +199,10 @@ La inclusión de las cabeceras se hace mediante la directiva del preprocesador *
 
 Cuando las cabeceras se incluyan con ruta relativa (core/defs.h) se utilizará siempre (/) en lugar de (\). En Visual Studio la última opción es la que reconoce (nos muestra las sugerencias de los archivos que hay en esa ruta) pero esa barra da problemas en Linux y por tanto es mejor usar la otra opción.
 
-### La diferencia entre “” y <> ###
-
-```cpp
-#include <iostream>
-
-#include “core.h”
-```
-
-Como se puede ver en los *includes* de arriba de estas líneas se pueden incluir los archivos con dos delimitadores diferentes. En el primer caso la directiva **#include** lo que hace es buscar entre todos los directorios que se han especificado en apartado *include* del compilador. En el caso de las comillas la diferencia es que la búsqueda se realiza en primer lugar en el mismo directorio del fichero que se está compilando y posteriormente en el resto de directorios.
-
-En el caso de nuestras propias cabeceras se utilizará la versión con comillas.
-
-### Cabeceras estándar ###
-
-Las cabeceras estándar de C++ van sin el .h. Las de la librería estándar de C, por razones de estandarización, se deben incluir sin el .h, y con la letra c como prefijo.
-
-Cabecera antigua  | Nueva cabecera
------------------ | --------------
-iostream.h        | iostream
-string.h          | string
-stdlib.h          | cstdlib
-stdio.h           | cstdio
-
-## forward declarations ##
-
-La declaración *forward* o declaración incompleta de clases se usa para evitar tener que incluir una definición de tipo que sólo aparezca como puntero o como referencia en la cabecera.
-
-```cpp
-
-class Center;
- 
-class Circle 
-{
-  Center *getCenter();
-};
-```
-
-# Namespaces #
-
-Los namespaces, siempre que se usen, se definen con siglas o nombres cortos y minúsculas.
-El contenido de un namespace no debe de ir tabulado.
-
-## No usar using namespaces en las cabeceras ##
-
-Quizás por comodidad, la gente se acostumbra a usar esta sintaxis en los archivos de cabecera, así el acceso a las clases incluidas en ese espacio de nombres es más corto y limpio.
-
-El problema es que al incluir un using en un archivo de cabecera automáticamente se propaga a todos los archivos que tengan dependencias de dicha cabecera.
-
-En caso de usar esta característica, añádela únicamente a los cpp, aunque mi consejo personal es no usar "using namespace" como norma general. La razón es que al perder la clase su espacio de nombres se desvirtúa el código. "std::vector" te da mucha más información que "vector" a secas, además evitas colisiones por coincidencia de nombres.
-
-
-# Clases #
+### Clases
 
 La estructura de una clase seguirá una serie de reglas de formato:
 
-* La llave de apertura “{” se añade en la línea siguiente al nombre de la clase.
 * Primero se añadirán los datos miembro de la clase. Dentro de estos primero irán los miembros *private*, seguidos de los *protected* y por último los *public*.
 * A continuación de los datos miembro se situaran las constructoras y la destructora de la clase.
 * Por último se añaden las declaraciones de los métodos miembro de la clase siguiendo el mismo orden que los datos miembro de *private*, *protected* y *public*.
@@ -195,51 +238,121 @@ class Clazz
 // Variables
 private:
 
-  int var;
+  int var1;
 
 protected:
 
-public:
+  int var2;
 
 public:
 
-  /*!
-   * \brief Constuctora
-   */
-  Clazz(){};
+  int var3;
 
-  /*!
-   * \brief ~Destuctora
-   */
-  ~Clazz(){};
+// Constructors and assignment operators
+public:
 
+  Clazz() = default; // Equivalente a Clazz() {}
+  Clazz(const Clazz& clazz);
+  Clazz(Clazz&& clazz) noexcept;
+  ~Clazz() = default;
+  
+  Clazz& operator=(const Clazz& clazz);
+  Clazz& operator=(Clazz&& clazz) noexcept;
+  
 // Methods
 private:
 
+	void function1();
+
 public:
+
+	void function2();
+    
+    Clazz& operator+=(const Clazz& clazz);
+    Clazz operator+(const Clazz& clazz);
 
 }; // End Clazz
 
 } // End namespace
 ```
 
-## Constructores y destructores ##
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Prácticas para un código limpio
+
+### La diferencia entre “” y <>
+
+```cpp
+#include <iostream>
+
+#include “core.h”
+```
+
+Como se puede ver en los *includes* de arriba de estas líneas se pueden incluir los archivos con dos delimitadores diferentes. En el primer caso la directiva **#include** lo que hace es buscar entre todos los directorios que se han especificado en apartado *include* del compilador. En el caso de las comillas la diferencia es que la búsqueda se realiza en primer lugar en el mismo directorio del fichero que se está compilando y posteriormente en el resto de directorios.
+
+En el caso de nuestras propias cabeceras se utilizará la versión con comillas.
+
+### Cabeceras estándar
+
+Las cabeceras estándar de C++ van sin el .h. Las de la librería estándar de C, por razones de estandarización, se deben incluir sin el .h, y con la letra c como prefijo.
+
+Cabecera antigua  | Nueva cabecera
+----------------- | --------------
+iostream.h        | iostream
+string.h          | string
+stdlib.h          | cstdlib
+stdio.h           | cstdio
+
+### No usar using namespaces en las cabeceras
+
+Quizás por comodidad, la gente se acostumbra a usar esta sintaxis en los archivos de cabecera, así el acceso a las clases incluidas en ese espacio de nombres es más corto y limpio.
+
+El problema es que al incluir un using en un archivo de cabecera automáticamente se propaga a todos los archivos que tengan dependencias de dicha cabecera.
+
+En caso de usar esta característica, añádela únicamente a los cpp, aunque mi consejo personal es no usar "using namespace" como norma general. La razón es que al perder la clase su espacio de nombres se desvirtúa el código. "std::vector" te da mucha más información que "vector" a secas, además evitas colisiones por coincidencia de nombres.
+
+### forward declarations
+
+La declaración *forward* o declaración incompleta de clases se usa para evitar tener que incluir una definición de tipo que sólo aparezca como puntero o como referencia en la cabecera.
+
+```cpp
+
+class Center;
+ 
+class Circle 
+{
+  Center *getCenter();
+};
+```
+
+### Constructores y destructores
 
 ....
 
-## Clases virtuales ##
+### Clases virtuales
 
-### Destructores virtuales ### 
+### Destructores virtuales
 
 Es importante que los destructores de las clases que tengan métodos virtuales sean virtuales.
 
-### Métodos y funciones ###
+### Métodos y funciones
 
 ...
 
-# Paso de parámetros a funciones y métodos miembro #
+### Paso de parámetros a funciones y métodos miembro
 
-## Paso de parámetros por referencia ##
+### Paso de parámetros por referencia
 
 El paso de parámetros a una función o un método miembro de una clase se hará siempre que sea un valor de entrada con el modificador de acceso *const* y como una referencia mediante el operador de referencia(&).
 
