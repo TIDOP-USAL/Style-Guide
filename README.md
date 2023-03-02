@@ -3,26 +3,24 @@
 Con el fin de reducir el esfuerzo necesario para leer y entender el código fuente, así como de mejorar la apariencia del código fuente se define un conjunto de reglas para la elección de los nombres de variables, clases, funciones, etc. Estas normas están orientadas a una uniformización del código que repercuta en una mejor legibilidad del mismo por parte de todos los desarrolladores.
 
 ## Índice
-- [Estilo](#estilo)
- * [Convención de nombres](#convención-de-nombres)
+- [Convención de nombres](#convención-de-nombres)
   + [Variables y datos miembro](#variables-y-datos-miembro)
   + [Nombre de los namespaces](#nombre-de-los-namespaces)
   + [Nombre de las clases](#nombre-de-las-clases)
   + [Métodos miembro](#métodos-miembro)
   + [Constantes](#constantes)
- * [Formato](#formato)
+- [Formato](#formato)
   + [Ajuste](#ajuste)
   + [Espaciado](#espaciado)
   + [Nuevas líneas](#nuevas-líneas)
- * [Estructura de los archivos de cabecera](#estructura-de-los-archivos-de-cabecera)
-  + [Include guards](#include-guards)
-  + [#include](##include)
+- [Jerarquías](#jerarquías)
+  + [Orden de los #include](#orden-de-los-include)
+  + [Clases](#clases)
+- [Ejemplo](#ejemplo)
+  + [Ejemplo Jerarquías](#ejemplo-jerarquías)
+  + [Ejemplo estructuras de control](#ejemplo-estructuras-de-control)
 
-# Estilo
-
-Aquí se definirán el conjunto de normas que dan forma al estilo
-
-## Convención de nombres
+# Convención de nombres
 
 Como criterio general se usará el estilo CamelCase o capitalización medial ya que si el identificador está compuesto de más de una palabra al separarlas con mayúsculas aumenta la legibilidad. Existen dos tipos de CamelCase:
 
@@ -84,27 +82,27 @@ Los nombres de las constantes se deben escribir en mayúsculas separadas por gui
 const char *LOG_FILE = “[nombre_fichero_log]”; 
 ```
 
-## Formato
+# Formato
 
 El formato de código en programación se refiere a la manera en que se estructura el código fuente de un programa para que sea fácil de leer y entender por otros programadores.
 
-### Ajuste
+## Ajuste
 
 ```cpp
 void function(int a, int b)
 {
-    if (a < b) return true;
+	if (a < b) return true;
 
-    if (a >= b) {
-    	a += b * 5;
-        return false;
-    }
+	if (a >= b) {
+		a += b * 5;
+		return false;
+	}
 }
 ```
 
 En condiciones y bucles, cuando se tiene una sola línea de código se omitirán las llaves y si, la línea es corta se pondrá en el mismo el bloque. Si hay más líneas, se pondrán las llaves y se escribirán en otro bloque.
 
-### Espaciado
+## Espaciado
 
 Configurar el IDE para que las tabulaciones se conviertan en cuatro espacios.
 
@@ -114,7 +112,7 @@ Espaciado para paréntesis
 void function(int a)
 {
 	int b = 5;
-    int result = sum(a, b);
+	int result = sum(a, b);
 }
 ```
 
@@ -124,13 +122,13 @@ Espaciado para llaves
 void function2(int a, int b)
 {
 	if(a >= b) {
-    	std::cout << "Error" << std::endl;
-        return;
-    }
+		std::cout << "Error" << std::endl;
+		return;
+	}
     
-    for(int i = a; i < b; i++) {
-    	
-    }
+	for(int i = a; i < b; i++) {
+
+	}
 }
 ```
 
@@ -138,11 +136,11 @@ Espaciado corchetes
 ```cpp
 int front(const std::vector<int> &numbers)
 {
-    return numbers[0];
+	return numbers[0];
 }
 ```
 
-### Nuevas líneas
+## Nuevas líneas
 
 Aplicar sangría en todos los bloques excepto en los namespaces.
 En el caso de estructuras y clases se utilizarán los modificadores private, protected, public también como separadores (sin tabular).
@@ -157,27 +155,27 @@ class Clazz
 public:
 
 	Clazz() 
-    {
-    	...
-    }
+	{
+		...
+	}
     
 public:
 
 	void functionA()
-    {
-    	...
-    }
-    
+	{
+		...
+	}
+	
 }
 
 }
 ```
 
-## Jerarquías
+# Jerarquías
 
 Orden en el que se escribe el código
 
-### Orden de los #include
+## Orden de los #include
 
 En los archivos de cabecera se añadirá la declaración de las clases, de las estructuras, funciones, enumeraciones y constantes.
 
@@ -199,7 +197,7 @@ La inclusión de las cabeceras se hace mediante la directiva del preprocesador *
 
 Cuando las cabeceras se incluyan con ruta relativa (core/defs.h) se utilizará siempre (/) en lugar de (\). En Visual Studio la última opción es la que reconoce (nos muestra las sugerencias de los archivos que hay en esa ruta) pero esa barra da problemas en Linux y por tanto es mejor usar la otra opción.
 
-### Clases
+## Clases
 
 La estructura de una clase seguirá una serie de reglas de formato:
 
@@ -238,27 +236,27 @@ class Clazz
 // Variables
 private:
 
-  int var1;
+	int var1;
 
 protected:
 
-  int var2;
+	int var2;
 
 public:
 
-  int var3;
+	int var3;
 
 // Constructors and assignment operators
 public:
 
-  Clazz() = default; // Equivalente a Clazz() {}
-  Clazz(const Clazz& clazz);
-  Clazz(Clazz&& clazz) noexcept;
-  ~Clazz() = default;
-  
-  Clazz& operator=(const Clazz& clazz);
-  Clazz& operator=(Clazz&& clazz) noexcept;
-  
+	Clazz() = default; // Equivalente a Clazz() {}
+	Clazz(const Clazz& clazz);
+	Clazz(Clazz&& clazz) noexcept;
+	~Clazz() = default;
+	
+	Clazz& operator=(const Clazz& clazz);
+	Clazz& operator=(Clazz&& clazz) noexcept;
+	
 // Methods
 private:
 
@@ -267,100 +265,158 @@ private:
 public:
 
 	void function2();
-    
-    Clazz& operator+=(const Clazz& clazz);
-    Clazz operator+(const Clazz& clazz);
+	
+	Clazz& operator+=(const Clazz& clazz);
+	Clazz operator+(const Clazz& clazz);
 
 }; // End Clazz
 
 } // End namespace
 ```
 
+# Ejemplo
 
+Ejemplo básico de formato.
 
+## Ejemplo Jerarquías
+```cpp
+#pragma once
 
+namespace ns
+{
 
+class Shape // Shape interface
+{
 
+public:
 
+	enum class ShapeType : int {
+		None = 0, Triangle = 1, Circle = 2, Ellipse = 3
+	};
 
+private:
 
+	... // Private vars
 
+protected:
 
+	ShapeType shapeType;
 
+public:
 
+	... // Public vars
 
-# Prácticas para un código limpio
+public:
 
-### La diferencia entre “” y <>
+	Shape() = default;
+	Shape(ShapeType _shapeType);
+	virtual ~Shape() = default;
+
+private:
+
+	... // Private methods
+
+protected:
+
+	... // Protected methods
+
+public:
+
+	virtual double area() const = 0;
+
+public: // Getters and Setters
+
+	inline void setType(ShapeType shapeType) { this->shapeType = shapeType; } // Redundant inline keyword
+	ShapeType getType() const { return shapeType; }
+};
+
+template<typename T>
+class Circle
+  : public Shape
+{
+
+public:
+
+  typedef T value_type;
+  Point<T> center;
+  T radius;
+
+public:
+
+	Circle();
+	Circle(const Point<T> &center, T radius);
+	Circle(const Circle<T> &circle);
+	Circle(Circle<T> &&circle) noexcept;
+	~Circle() override = default;
+
+	Circle<T> &operator = (const Circle<T> &circle);
+	Circle<T>& operator = (Circle<T> &&circle) noexcept;
+
+public:
+  	double area() const override;
+  	double length() const;
+
+};
+
+typedef Circle<int> CircleI;
+using CircleD = Circle<double>; // Equivalent to: typedef Circle<double> CircleD;
+
+}
+```
+
+## Ejemplo estructuras de control
 
 ```cpp
 #include <iostream>
 
-#include “core.h”
-```
-
-Como se puede ver en los *includes* de arriba de estas líneas se pueden incluir los archivos con dos delimitadores diferentes. En el primer caso la directiva **#include** lo que hace es buscar entre todos los directorios que se han especificado en apartado *include* del compilador. En el caso de las comillas la diferencia es que la búsqueda se realiza en primer lugar en el mismo directorio del fichero que se está compilando y posteriormente en el resto de directorios.
-
-En el caso de nuestras propias cabeceras se utilizará la versión con comillas.
-
-### Cabeceras estándar
-
-Las cabeceras estándar de C++ van sin el .h. Las de la librería estándar de C, por razones de estandarización, se deben incluir sin el .h, y con la letra c como prefijo.
-
-Cabecera antigua  | Nueva cabecera
------------------ | --------------
-iostream.h        | iostream
-string.h          | string
-stdlib.h          | cstdlib
-stdio.h           | cstdio
-
-### No usar using namespaces en las cabeceras
-
-Quizás por comodidad, la gente se acostumbra a usar esta sintaxis en los archivos de cabecera, así el acceso a las clases incluidas en ese espacio de nombres es más corto y limpio.
-
-El problema es que al incluir un using en un archivo de cabecera automáticamente se propaga a todos los archivos que tengan dependencias de dicha cabecera.
-
-En caso de usar esta característica, añádela únicamente a los cpp, aunque mi consejo personal es no usar "using namespace" como norma general. La razón es que al perder la clase su espacio de nombres se desvirtúa el código. "std::vector" te da mucha más información que "vector" a secas, además evitas colisiones por coincidencia de nombres.
-
-### forward declarations
-
-La declaración *forward* o declaración incompleta de clases se usa para evitar tener que incluir una definición de tipo que sólo aparezca como puntero o como referencia en la cabecera.
-
-```cpp
-
-class Center;
- 
-class Circle 
+template <typename T>
+struct Vec3 
 {
-  Center *getCenter();
+	union { T x; T r; };
+	union { T y; T g; };
+	union { T z; T b; };
+
+	Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) { }
+	Vec3() = default;
+	~Vec3() = default;
+
+	Vec3& operator+=(const Vec3& rhs)
+	{
+		x += rhs.x;
+		y += rhs.y;
+		z += rhs.z;
+		return *this;
+	}
 };
+typedef Vec3<float> Vec3f;
+using Vec3d = Vec3<double>;
+
+int main() {
+
+	size_t length = 10;
+	for (size_t i = 0; i < length; i ++) 
+		std::cout << "Index: " << i << std::endl;
+
+	bool running = true;
+	while(running) {
+		static int index = 0;
+
+		std::cout << "Index: " << index << std::endl;
+
+		if(index >= 10) running = false;
+		index ++;
+	}
+
+	auto dot = [&] (const Vec3f& u, const Vec3f& v) {
+		return u.x * v.x + u.y * v.y + u.z * v.z;
+	};
+
+	Vec3f u(1, 0, 0);
+	Vec3f v(0, 1, 0);
+
+	float result = dot(u, v);
+
+	return 0;
+}
+
 ```
-
-### Constructores y destructores
-
-....
-
-### Clases virtuales
-
-### Destructores virtuales
-
-Es importante que los destructores de las clases que tengan métodos virtuales sean virtuales.
-
-### Métodos y funciones
-
-...
-
-### Paso de parámetros a funciones y métodos miembro
-
-### Paso de parámetros por referencia
-
-El paso de parámetros a una función o un método miembro de una clase se hará siempre que sea un valor de entrada con el modificador de acceso *const* y como una referencia mediante el operador de referencia(&).
-
-```cpp
-
-void function1(const Obj& obj);
-```
-
-Por defecto en C++ los parámetros se pasan por valor, es decir que se pasa una copia del objeto. Esto en los tipos básicos no tiene importancia pero si estamos pasando objetos mas complejos no estamos siendo eficientes ya que al hacer una copia de un objeto, a parte de ocupar espacio en memoria, se tiene que llamar a la constructora del objeto. En lugar de esto si pasamos el objeto como referencia no se crea un objeto nuevo mejorando la eficiencia del código.
-
-Al ser un parámetro de entrada (no modificable) para asegurarnos que no se modifica internamente su valor utilizamos el modificador de acceso *const*. El pasar un objeto como *const* a una función (o declarar un objeto en su creación como constante) tiene consecuencias en cuanto a que su valor no puede ser modificado. Los métodos miembros de ese objeto que no estén declarados como const no se podrán utilizar (esto lo veremos posteriormente).
