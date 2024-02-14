@@ -91,12 +91,12 @@ El formato de código en programación se refiere a la manera en que se estructu
 ```cpp
 void function(int a, int b)
 {
-  if (a < b) return true;
+    if (a < b) return true;
 
-  if (a >= b) {
-    a += b * 5;
-    return false;
-  }
+    if (a >= b) {
+        a += b * 5;
+        return false;
+    }
 }
 ```
 
@@ -111,8 +111,8 @@ Espaciado para paréntesis
 ```cpp
 void function(int a)
 {
-  int b = 5;
-  int result = sum(a, b);
+    int b = 5;
+    int result = sum(a, b);
 }
 ```
 
@@ -121,14 +121,14 @@ Espaciado para llaves
 ```cpp
 void function2(int a, int b)
 {
-  if(a >= b) {
-    std::cout << "Error" << std::endl;
-    return;
-  }
+    if(a >= b) {
+        std::cout << "Error" << std::endl;
+        return;
+    }
   
-  for(int i = a; i < b; i++) {
+    for(int i = a; i < b; i++) {
 
-  }
+    }
 }
 ```
 
@@ -136,7 +136,7 @@ Espaciado corchetes
 ```cpp
 int front(const std::vector<int> &numbers)
 {
-  return numbers[0];
+    return numbers[0];
 }
 ```
 
@@ -154,17 +154,17 @@ class Clazz
 
 public:
 
-  Clazz() 
-  {
-    ...
-  }
+    Clazz() 
+    {
+        ...
+    }
     
 public:
 
-  void functionA()
-  {
-    ...
-  }
+    void functionA()
+    {
+        ...
+    }
 	
 }
 
@@ -231,38 +231,38 @@ class Clazz
 // Variables
 private:
 
-  int var1;
+    int var1;
 
 protected:
 
-  int var2;
+    int var2;
 
 public:
 
-  int var3;
+    int var3;
 
 // Constructors and assignment operators
 public:
 
-  Clazz() = default; // Equivalente a Clazz() {}
-  Clazz(const Clazz& clazz);
-  Clazz(Clazz&& clazz) noexcept;
-  ~Clazz() = default;
+    Clazz() = default; // Equivalente a Clazz() {}
+    Clazz(const Clazz& clazz);
+    Clazz(Clazz&& clazz) noexcept;
+    ~Clazz() = default;
 	
-  Clazz& operator=(const Clazz& clazz);
-  Clazz& operator=(Clazz&& clazz) noexcept;
+    Clazz& operator=(const Clazz& clazz);
+    Clazz& operator=(Clazz&& clazz) noexcept;
 	
 // Methods
 private:
 
-  void function1();
+    void function1();
 
 public:
 
-  void function2();
+    void function2();
 	
-  Clazz& operator+=(const Clazz& clazz);
-  Clazz operator+(const Clazz& clazz);
+    Clazz& operator+=(const Clazz& clazz);
+    Clazz operator+(const Clazz& clazz);
 
 }; // End Clazz
 
@@ -285,9 +285,13 @@ class Shape // Shape interface
 
 public:
 
-  enum class ShapeType : int {
-    None = 0, Triangle = 1, Circle = 2, Ellipse = 3
-	};
+    enum class ShapeType : int
+    {
+        None = 0,
+        Triangle = 1,
+        Circle = 2,
+        Ellipse = 3
+    };
 
 private:
 
@@ -303,9 +307,9 @@ public:
 
 public:
 
-  Shape() = default;
-  Shape(ShapeType _shapeType);
-  virtual ~Shape() = default;
+    Shape() = default;
+    Shape(ShapeType _shapeType);
+    virtual ~Shape() = default;
 
 private:
 
@@ -332,25 +336,25 @@ class Circle
 
 public:
 
-  typedef T value_type;
-  Point<T> center;
-  T radius;
+    typedef T value_type;
+    Point<T> center;
+    T radius;
 
 public:
 
-  Circle();
-  Circle(const Point<T> &center, T radius);
-  Circle(const Circle<T> &circle);
-  Circle(Circle<T> &&circle) noexcept;
-  ~Circle() override = default;
+    Circle();
+    Circle(const Point<T> &center, T radius);
+    Circle(const Circle<T> &circle);
+    Circle(Circle<T> &&circle) noexcept;
+    ~Circle() override = default;
 
-  Circle<T> &operator = (const Circle<T> &circle);
-  Circle<T>& operator = (Circle<T> &&circle) noexcept;
+    Circle<T> &operator = (const Circle<T> &circle);
+    Circle<T>& operator = (Circle<T> &&circle) noexcept;
 
 public:
 
-  double area() const override;
-  double length() const;
+    double area() const override;
+    double length() const;
 
 };
 
@@ -368,51 +372,51 @@ using CircleD = Circle<double>; // Equivalent to: typedef Circle<double> CircleD
 template <typename T>
 struct Vec3 
 {
-  union { T x; T r; };
-  union { T y; T g; };
-  union { T z; T b; };
+    union { T x; T r; };
+    union { T y; T g; };
+    union { T z; T b; };
 
-  Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) { }
-  Vec3() = default;
-  ~Vec3() = default;
+    Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) { }
+    Vec3() = default;
+    ~Vec3() = default;
 
-  Vec3& operator+=(const Vec3& rhs)
-  {
-    x += rhs.x;
-    y += rhs.y;
-    z += rhs.z;
-    return *this;
-  }
+    Vec3& operator+=(const Vec3& rhs)
+    {
+        x += rhs.x;
+        y += rhs.y;
+        z += rhs.z;
+        return *this;
+    }
 };
 typedef Vec3<float> Vec3f;
 using Vec3d = Vec3<double>;
 
 int main() {
 
-  size_t length = 10;
-  for (size_t i = 0; i < length; i ++) 
-    std::cout << "Index: " << i << std::endl;
+    size_t length = 10;
+    for (size_t i = 0; i < length; i ++) 
+        std::cout << "Index: " << i << std::endl;
 
-  bool running = true;
-  while(running) {
-    static int index = 0;
+    bool running = true;
+    while(running) {
+        static int index = 0;
 
-    std::cout << "Index: " << index << std::endl;
+        std::cout << "Index: " << index << std::endl;
 
-    if(index >= 10) running = false;
-    index ++;
-  }
+        if(index >= 10) running = false;
+        index ++;
+    }
 
-  auto dot = [&] (const Vec3f& u, const Vec3f& v) {
-    return u.x * v.x + u.y * v.y + u.z * v.z;
-  };
+    auto dot = [&] (const Vec3f& u, const Vec3f& v) {
+      return u.x * v.x + u.y * v.y + u.z * v.z;
+    };
 
-  Vec3f u(1, 0, 0);
-  Vec3f v(0, 1, 0);
+    Vec3f u(1, 0, 0);
+    Vec3f v(0, 1, 0);
 
-  float result = dot(u, v);
+    float result = dot(u, v);
 
-  return 0;
+    return 0;
 }
 
 ```
